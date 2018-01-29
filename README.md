@@ -2,13 +2,16 @@
 
 ![GitHub Logo](./preview1.png)
 
-This is linked at my crappy temporary [Portfolio](https://jonmpan.github.io/Bootstrap-Portfolio/).
+**Instructions:**
 
-*Much Needed Improvements:*
+Play this game with a maximized CLI window. Start the game AFTER you maximize your CLI window. This should help the ASCII art adjust to your resolution.
+
+***Much Needed Improvements:***
 - Everything
 - Disable inputs until the prompt to play again pops up
 - More better words and keeps track of the word bank
 - Cosmetic improvements
+- Make it work with landscape resolutions
 
 **Never Forget:**
 
