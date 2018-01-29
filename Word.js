@@ -56,7 +56,7 @@ function Word(query){
 	}
 
 	this.updateDisplay = (guesses, custom)=>{
-		console.log('\033[2J');
+		process.stdout.write('\033c');
 		console.log('');
 		console.log(this.displayText);
 		console.log('');

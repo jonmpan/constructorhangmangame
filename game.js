@@ -11,11 +11,15 @@ var options = {
 	height: '100%'
 }
 
+console.reset = function () {
+	return process.stdout.write('\033c');
+}
+
 var youWinPic = ()=>{
 	asciify('./yourewinner.jpg', options)
 		.then(function (asciified) {
 			console.log(asciified);
-			var myVar = setTimeout(playAgain,1500);
+			var myVar = setTimeout(function(){playAgain('win')},500);
 		})
 	.catch(function (err) {
 		console.error(err);
@@ -26,7 +30,7 @@ var youLosePic = ()=>{
 	asciify('./gameover.jpg', options)
 		.then(function (asciified) {
 		console.log(asciified);
-		var myVar = setTimeout(playAgain,1500);
+		var myVar = setTimeout(function(){playAgain('lose')},500);
 		})
 	.catch(function (err) {
 		console.error(err);
@@ -58,7 +62,10 @@ function allLetter(inputtxt){
 	}
 }
 
-var playAgain = ()=>{
+var playAgain = (state)=>{
+	if(state === 'lose'){
+		console.log('The answer was: '+word.word);
+	}
 	inquirer.prompt([
 	{
 		type: 'input',
