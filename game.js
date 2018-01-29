@@ -1,9 +1,37 @@
 var fs = require('fs');
 var inquirer = require('inquirer');
+var asciify = require('asciify-image');
 var {Word} = require('./Word.js');
 var guess = '';
 var guesses = [];
-// var guessesDisplay = guesses.join(' ');
+
+var options = {
+	fit:    'box',
+	width:  '100%',
+	height: '100%'
+}
+
+var youWinPic = ()=>{
+	asciify('./yourewinner.jpg', options)
+		.then(function (asciified) {
+			console.log(asciified);
+			var myVar = setTimeout(playAgain,1500);
+		})
+	.catch(function (err) {
+		console.error(err);
+	});
+}
+
+var youLosePic = ()=>{
+	asciify('./gameover.jpg', options)
+		.then(function (asciified) {
+		console.log(asciified);
+		var myVar = setTimeout(playAgain,1500);
+		})
+	.catch(function (err) {
+		console.error(err);
+	});
+}
 
 var chooseWord = ()=>{
 	fs.readFile('words.txt', 'utf8', (err, data)=>{
@@ -13,7 +41,6 @@ var chooseWord = ()=>{
 		var wordsArray = data.split(',');
 		var random = Math.floor((Math.random()*wordsArray.length));
 		word = new Word(wordsArray[random]);
-		// console.log('word: '+word.word);
 		word.setLetters();
 		word.updateDisplayText();
 		word.updateDisplay('');
@@ -34,29 +61,32 @@ function allLetter(inputtxt){
 var playAgain = ()=>{
 	inquirer.prompt([
 	{
-		type: 'list',
-		choices: ['Yes', 'No'],
+		type: 'input',
 		name: 'choice',
-		message: 'Play again?'
+		message: 'Play again?(y/n)'
 	}
 	]).then((response)=>{
-		if(response.choice === 'Yes'){
+		if(response.choice === 'y' || response.choice === 'Y'){
 			chooseWord();
 		}
-		else{
+		else if(response.choice === 'n' || response.choice === 'N'){
 			console.log('Thanks for playing!');
+		}
+		else{
+			playAgain();
 		}
 	})
 }
 
+
 var checkGame = ()=>{
 	if(word.lives === 0){
 		console.log('You Lose!');
-		playAgain();
+		youLosePic();
 	}
 	else if(word.score === word.letterCount){
 		console.log('You Win!');
-		playAgain();
+		youWinPic();
 	}
 	else{
 		inquireGuess();
@@ -79,14 +109,12 @@ var inquireGuess = ()=>{
 				guesses.forEach((data)=>{
 					if(guess === data){
 						alreadyGuessed = true;
-						// console.log('Already Guessed!');
 					}
 				});
 			}
 		}
 		else{
 			notValid = true;
-			// console.log('Please input a single letter!');
 		}
 		if(!alreadyGuessed && !notValid){
 			setGuess();

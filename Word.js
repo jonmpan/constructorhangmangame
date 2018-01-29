@@ -6,7 +6,7 @@ function Word(query){
 	this.letterCount = 0;
 	this.checkCounter = 0;
 	this.score = 0;
-	this.lives = 10;
+	this.lives = 6;
 	this.display = '';
 
 	this.setLetters = ()=>{
@@ -18,8 +18,6 @@ function Word(query){
 				this.letterCount++;
 			}
 		};
-		// console.log(this.lettersArray);
-		// console.log(this.letterCount);
 	};
 
 	this.checkLetters = (guess)=>{
@@ -29,11 +27,9 @@ function Word(query){
 			word.lettersArray[i].check(guess);
 			if(word.lettersArray[i].show){
 				this.score++;
-				// console.log('score: '+this.score);
 			}
 			if(word.lettersArray[i].letter != ' ' && guess != word.lettersArray[i].letter.toLowerCase()){
 				this.checkCounter++;
-				// console.log('CheckCounter: '+this.checkCounter);
 			};
 		};
 	};
@@ -51,25 +47,12 @@ function Word(query){
 				this.displayText += '  ';
 			}
 		}
-		// console.log('\033[2J');
-		// console.log('');
-		// console.log(this.displayText);
-		// console.log('');
 	};
 
 	this.updateGame = (guesses)=>{
-		// if(this.score < this.letterCount){
-
-			if(this.checkCounter === this.letterCount){
-				this.lives--;
-				// console.log('Incorrect!');
-			}
-			// else{
-				// console.log('Correct!');
-			// }
-			// console.log('Lives: '+this.lives);
-			// console.log('Guesses: '+guesses);
-		// }
+		if(this.checkCounter === this.letterCount){
+			this.lives--;
+		}
 	}
 
 	this.updateDisplay = (guesses, custom)=>{
