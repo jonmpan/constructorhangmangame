@@ -1,19 +1,14 @@
 var fs = require('fs');
 var inquirer = require('inquirer');
 var asciify = require('asciify-image');
-var {Word} = require('./Word.js');
-var guess = '';
-var guesses = [];
-
 var options = {
 	fit:    'box',
 	width:  '100%',
 	height: '100%'
 }
-
-console.reset = function () {
-	return process.stdout.write('\033c');
-}
+var {Word} = require('./Word.js');
+var guess = '';
+var guesses = [];
 
 var youWinPic = ()=>{
 	asciify('./yourewinner.jpg', options)
@@ -84,7 +79,6 @@ var playAgain = (state)=>{
 		}
 	})
 }
-
 
 var checkGame = ()=>{
 	if(word.lives === 0){

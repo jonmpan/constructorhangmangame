@@ -6,7 +6,7 @@ function Word(query){
 	this.letterCount = 0;
 	this.checkCounter = 0;
 	this.score = 0;
-	this.lives = 6;
+	this.lives = 7;
 	this.display = '';
 
 	this.setLetters = ()=>{
@@ -56,7 +56,8 @@ function Word(query){
 	}
 
 	this.updateDisplay = (guesses, custom)=>{
-		process.stdout.write('\033c');
+		// process.stdout.write('\033c');
+		process.stdout.write('\x1B[2J\x1B[0f');
 		console.log('');
 		console.log(this.displayText);
 		console.log('');
