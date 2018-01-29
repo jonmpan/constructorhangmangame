@@ -7,6 +7,7 @@
 - **Play this game with a maximized CLI window.**
 - Start the game AFTER you maximize your CLI window.
 - This should help the ASCII art adjust to your resolution.
+- Please allow the game to load for a few seconds.
 - Win 3 times to see some ASCII animation!
 
 ***Much Needed Improvements:***
